@@ -2,5 +2,5 @@
 學生:孫士傑  
 教師:蔡芸琤
 # 作業連結區  
-[作業一檔案](https://github.com/jaison5/Database-113/blob/main/%E4%BD%9C%E6%A5%AD%E4%B8%80.sql)[作業一影片解說](
+[作業一檔案](https://github.com/jaison5/Database-113/blob/main/%E4%BD%9C%E6%A5%AD%E4%B8%80.sql)  [作業一影片解說](
 https://youtu.be/yhgwgaZDgFA?si=g4F9TQQlNEM50498)
