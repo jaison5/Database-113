@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+</head>
+<body>
+    <h1>Edit Post</h1>
+    
+    <form method="POST" action="/update/{{ post.id }}">
+        <label for="content">Post Content:</label>
+        <input type="text" id="content" name="content" value="{{ post.content }}" required>
+        
+        <label for="user_id">User ID:</label>
+        <input type="number" id="user_id" name="user_id" value="{{ post.user_id }}" required>
+        
+        <label for="category_id">Category ID:</label>
+        <input type="number" id="category_id" name="category_id" value="{{ post.category_id }}" required>
+        
+        <button type="submit">Update Post</button>
+    </form>
+
+    <a href="/">Go Back</a>
+</body>
+</html>
