@@ -8,4 +8,4 @@ https://youtu.be/yhgwgaZDgFA?si=g4F9TQQlNEM50498)
 [Homework 3 file](https://github.com/jaison5/Database-113/tree/main/%E4%BD%9C%E6%A5%AD%E4%B8%89%E8%B3%87%E6%96%99%E5%A4%BE)[Homework 3 video](https://youtu.be/jAi1QKB5zFM?si=cAR8CkXAzcNCFP-q)  
 [Homework 4 file](https://github.com/jaison5/Database-113/tree/main/%E4%BD%9C%E6%A5%AD%E5%9B%9B%E8%B3%87%E6%96%99%E5%A4%BE)
 # Final project   
-[Final projcet file](https://github.com/jaison5/Database-113/tree/main/%E4%BD%9C%E6%A5%AD%E5%9B%9B%E8%B3%87%E6%96%99%E5%A4%BE)
+[Final projcet file](https://github.com/jaison5/Database-113/tree/main/Final%20project%E6%AA%94%E6%A1%88)
