@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遊戲登錄系統</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e2f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #29293d;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        form input[type="text"], form button {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            background: #1e1e2f;
+            color: #fff;
+        }
+        form button {
+            background-color: #00ffff;
+            color: #1e1e2f;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        form button:hover {
+            background-color: #00ccff;
+        }
+        .card {
+            background: #29293d;
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+        }
+        .toggle-btn {
+            cursor: pointer;
+            color: #00ffff;
+            text-decoration: underline;
+        }
+        .content {
+            display: none;
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 3px solid #00ffff;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-top: 20px;
+            background-color: #00ffff;
+            color: #1e1e2f;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+        .button:hover {
+            background-color: #00ccff;
+        }
+        .edit-button {
+            background-color: #ffcc00;
+        }
+        .delete-button {
+            background-color: #ff5733;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: background 0.3s ease;
+        }
+        .delete-button:hover {
+            background-color: #c70039;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>遊戲檢索系統</h1>
+
+        <!-- 搜尋表單 -->
+        <h2>搜尋紀錄</h2>
+        <form method="POST" action="{{ url_for('search') }}">
+            <div class="form-group">
+                <label for="query">搜尋內容：</label>
+                <input type="text" id="query" name="query" required>
+                <button type="submit">搜尋</button>
+            </div>
+        </form>
+
+        <!-- 顯示/隱藏所有 -->
+        <form method="GET" action="{{ url_for('show_all') }}">
+            <button type="submit" class="button">
+                {{ "隱藏所有" if show_all else "顯示所有" }}
+            </button>
+        </form>
+
+        <!-- 顯示紀錄 -->
+        {% if data %}
+            {% for item in data %}
+                <div class="card">
+                    <h3>紀錄 ID：{{ item._id }}</h3>
+                    <span class="toggle-btn">[顯示詳細資料]</span>
+                    <div class="content">
+                        {% for key, value in item.items() %}
+                            {% if key != '_id' %}
+                                {% if key == 'name' %}
+                                    <p><strong>遊戲名稱：</strong> {{ value }}</p>
+                                {% elif key == 'description' %}
+                                    <p><strong>遊戲描述：</strong> {{ value }}</p>
+                                {% else %}
+                                    <p><strong>{{ key | capitalize }}：</strong> {{ value }}</p>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <a href="{{ url_for('update.update', id=item._id) }}" class="button edit-button">編輯</a>
+                        <form action="{{ url_for('delete.delete', id=item._id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="delete-button">刪除</button>
+                        </form>
+                    </div>                    
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center;">找不到任何紀錄。</p>
+        {% endif %}
+
+        <a href="{{ url_for('create') }}" class="button">新增紀錄</a>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.toggle-btn').click(function(){
+                $(this).next('.content').toggle();
+                $(this).text($(this).next('.content').is(':visible') ? '[隱藏詳細資料]' : '[顯示詳細資料]');
+            });
+        });
+    </script>
+</body>
+</html>

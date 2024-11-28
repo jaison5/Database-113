@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新紀錄 - 遊戲風格</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(135deg, #1e1e2f, #3a3a5b);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 70%;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(20, 20, 40, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
+            text-align: center;
+        }
+        h1 {
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            background: #1e1e2f;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #00ccff;
+            box-shadow: 0 0 10px #00ccff;
+        }
+        input[type="submit"] {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #007bff, #00ccff);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px #000;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        input[type="submit"]:hover {
+            background: linear-gradient(135deg, #0056b3, #00aaff);
+            transform: scale(1.05);
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #28a745, #32cd32);
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            text-shadow: 0 0 5px #000;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #218838, #2eb82e);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>更新紀錄</h1>
+        <form action="{{ url_for('update.update', id=entry['_id']) }}" method="POST">
+            {% for key, value in entry.items() %}
+                {% if key != '_id' %}
+                    {% if key == 'name' %}
+                        <label for="{{ key }}">遊戲名稱：</label>
+                    {% elif key == 'description' %}
+                        <label for="{{ key }}">遊戲描述：</label>
+                    {% else %}
+                        <label for="{{ key }}">{{ key | capitalize }}：</label>
+                    {% endif %}
+                    <input type="text" name="{{ key }}" id="{{ key }}" value="{{ value }}">
+                {% endif %}
+            {% endfor %}
+            <input type="submit" value="更新">
+        </form>
+        <a href="{{ url_for('index') }}" class="button">返回首頁</a>
+    </div>
+</body>
+</html>
